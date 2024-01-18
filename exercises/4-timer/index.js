@@ -1,4 +1,3 @@
-const timeFormatter = require('./time-formatter.js');
 const boom = require('./caboom.js');
 
 const timeString = process.argv.at(-1);
