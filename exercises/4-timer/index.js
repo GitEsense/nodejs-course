@@ -1,4 +1,5 @@
 const timeFormatter = require('./time-formatter.js');
+const boom = require('./caboom.js');
 
 const timeString = process.argv.at(-1);
 
@@ -18,15 +19,11 @@ function handleTimeString(str) {
         return total;
     }, 0);
 }
-let time = handleTimeString(timeString);
 
-console.log(`Запускаем обратный отсчёт!
-До взрыва осталось: ${timeFormatter(Math.floor(time))}`);
-const interval = setInterval(() => {
-    console.log(`До взрыва осталось: ${timeFormatter(Math.floor((time -= 1000)))}`);
-}, 1000);
+function main() {
+    console.log(`Запускаем обратный отсчёт!`);
+    const time = handleTimeString(timeString);
+    boom(time);
+}
 
-setTimeout(() => {
-    clearInterval(interval);
-    console.log('Boom!');
-}, time);
+main();
