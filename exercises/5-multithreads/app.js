@@ -66,16 +66,24 @@ const forker = (array, num = '') => {
 async function main() {
     try {
         const array = [];
-        for (let i = 1; i <= 10000000; i++) {
+        for (let i = 1; i <= 7777777; i++) {
             array.push(i);
         }
 
-        await Promise.all(splitArrayToWorkers(array, worker));
-        await Promise.all(splitArrayToWorkers(array, forker));
-        await worker(array);
-        await forker(array);
+        const resultWorkers = await Promise.all(splitArrayToWorkers(array, worker));
+        const resultForkers = await Promise.all(splitArrayToWorkers(array, forker));
+        const resultWorker = await worker(array);
+        const resultForker = await forker(array);
+
+        // console.log({
+        //     resultForker,
+        //     resultForkers: { array: resultForkers, total: resultForkers.reduce((a, c) => (a += c)) },
+        //     resultWorker,
+        //     resultWorkers: { array: resultWorkers, total: resultWorkers.reduce((a, c) => (a += c)) },
+        // });
     } catch (e) {
         console.error(e.message);
+    } finally {
     }
 }
 
