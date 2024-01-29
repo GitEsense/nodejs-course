@@ -1,0 +1,24 @@
+{
+    "name": "caboom-timer",
+    "version": "1.0.0",
+    "description": "CLI for getting weather",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [
+        "timer",
+        "notifier",
+        "node-notifier"
+    ],
+    "author": "Aleksei Cherepanov",
+    "license": "ISC",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/GitEsense/nodejs-course.git"
+    },
+    "dependencies": {
+        "node-notifier": "^10.0.1"
+    }
+}
