@@ -2,7 +2,6 @@ const getArgs = (args) => {
     const result = {};
     const [executer, file, ...other] = args;
     const indexOfAllCommands = other.reduce((acc, el, i) => (el.charAt(0) === '-' ? [...acc, i] : acc), []);
-    console.log(indexOfAllCommands);
 
     for (const [index, startIndex] of indexOfAllCommands.entries()) {
         const key = other[startIndex].substr(1);
