@@ -1,18 +1,22 @@
 const getArgs = (args) => {
-    const res = {};
+    const result = {};
     const [executer, file, ...other] = args;
-    other.map((value, index, array) => {
-        if (value.charAt(0) === '-') {
-            if (index === array.length - 1) {
-                res[value.substring(1)] = true;
-            } else if (array[index + 1].charAt(0) !== '-') {
-                res[value.substring(1)] = array[index + 1];
-            } else {
-                res[value.substring(1)] = true;
-            }
+    const indexOfAllCommands = other.reduce((acc, el, i) => (el.charAt(0) === '-' ? [...acc, i] : acc), []);
+    console.log(indexOfAllCommands);
+
+    for (const [index, startIndex] of indexOfAllCommands.entries()) {
+        const key = other[startIndex].substr(1);
+        const endIndex = indexOfAllCommands[index + 1] ?? other.length;
+        if (startIndex === other.length - 1) {
+            result[key] = true;
+        } else if (startIndex !== endIndex) {
+            const values = other.slice(startIndex + 1, endIndex);
+            result[key] = values.join(',');
+        } else {
+            result[key] = true;
         }
-    });
-    return res;
+    }
+    return result;
 };
 
 export { getArgs };

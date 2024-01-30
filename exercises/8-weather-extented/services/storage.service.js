@@ -7,17 +7,20 @@ const filePath = join(homedir(), 'weather-data.json');
 const TOKEN_DICTIONARY = {
     token: 'token',
     city: 'city',
-    lang: 'lang',
+    language: 'language',
 };
 
-const saveKeyValue = async (key, value) => {
-    let data = {};
+const saveKeyValue = async (data) => {
+    let json = {};
     if (await isExist(filePath)) {
         const file = await promises.readFile(filePath);
-        data = JSON.parse(file);
+        json = JSON.parse(file);
     }
-    data[key] = value;
-    await promises.writeFile(filePath, JSON.stringify(data));
+    data.map(([key, value]) => {
+        json[key] = value;
+    });
+
+    await promises.writeFile(filePath, JSON.stringify(json));
 };
 
 const getKeyValue = async (key) => {
