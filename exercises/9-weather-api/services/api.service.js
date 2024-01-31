@@ -40,7 +40,7 @@ const getWeather = async (attrs, options) => {
             units: 'metric',
         },
     });
-    const { data } = await axios.get('http://api.openweathermap.org/data/2.5/weather', {
+    const { data } = await axios.get('https://api.openweathermap.org/data/2.5/weather', {
         params: {
             q: city,
             appid: options.token,

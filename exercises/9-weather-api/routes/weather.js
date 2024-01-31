@@ -28,7 +28,7 @@ weatherRouter.get('/:city?', async (req, res) => {
     try {
         const result = await getKeyValue();
         const weather = await getWeather(req.params, result);
-        console.log(weather);
+
         // const icon = getIcon(weather.weather[0].icon);
         // const message = printWeather(weather, result?.lang, icon);
         res.json({ success: true, data: weather, message: '' });
