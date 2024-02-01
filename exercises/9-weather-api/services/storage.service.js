@@ -16,6 +16,9 @@ const saveKeyValue = async (data) => {
         json = JSON.parse(file);
     }
     data.map(([key, value]) => {
+        if (!value) {
+            return;
+        }
         json[key] = value;
     });
 

@@ -28,10 +28,10 @@ weatherRouter.get('/:city?', async (req, res) => {
     try {
         const result = await getKeyValue();
         const weather = await getWeather(req.params, result);
-
-        // const icon = getIcon(weather.weather[0].icon);
-        // const message = printWeather(weather, result?.lang, icon);
-        res.json({ success: true, data: weather, message: '' });
+        console.log(weather);
+        const icon = getIcon(weather.weather[0].icon);
+        const message = printWeather(weather, result?.lang, icon);
+        res.json({ success: true, data: weather, message });
     } catch (err) {
         let message;
         if (err?.response?.status === 404) {
@@ -39,7 +39,7 @@ weatherRouter.get('/:city?', async (req, res) => {
         } else if (err?.response?.status === 401) {
             message = 'Неверно указан токен';
         } else {
-            message = err;
+            message = err.message;
         }
         res.status(err?.response?.status ?? 500).json({ success: false, error: [], message });
     }
