@@ -1,29 +1,32 @@
-const boom = require('./scripts/caboom.js');
-
+import boom from "./scripts/caboom.js";
+import notifier from "node-notifier";
 const timeString = process.argv.at(-1);
 
-const template = [
-    { char: 'h', multiple: 1000 * 60 * 60 },
-    { char: 'm', multiple: 1000 * 60 },
-    { char: 's', multiple: 1000 },
-];
+const template = {
+  h: 1000 * 60 * 60,
+  m: 1000 * 60,
+  s: 1000,
+};
 
 function handleTimeString(str) {
-    const values = str.split(' ');
-    return values.reduce((total, item) => {
-        const num = Number.parseInt(item);
-        const char = item.slice(-1);
-        const { multiple } = template.find((t) => t.char === char);
-        total += num * multiple;
-        console.log(total);
-        return total;
-    }, 0);
+  const values = str.split(" ");
+  return values.reduce((total, item) => {
+    const num = Number.parseInt(item);
+    const char = item.slice(-1);
+    const ms = template[char];
+    total += num * ms;
+    return total;
+  }, 0);
 }
-
+const sendNotification = (options) => {
+  notifier.notify(options);
+};
 function main() {
-    console.log(`Запускаем обратный отсчёт!`);
-    const time = handleTimeString(timeString);
-    boom(time);
+  const time = handleTimeString(timeString);
+  const options = {
+    title: "My notification",
+    message: "Boom!",
+  };
+  boom(time, () => sendNotification(options));
 }
-
 main();

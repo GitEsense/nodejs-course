@@ -1,22 +1,24 @@
-const timeFormatter = require('./time-formatter.js');
-const { notify } = require('node-notifier');
-const path = require('path');
-const notifyOption = {
-    title: 'BOOM!',
-    message: 'Приложение отработало корректно, поздравляю!',
-    icon: path.join(__dirname, '../img/boom.jpg'),
-    sound: true,
-    wait: false,
-};
+import timeFormatter from "./time-formatter.js";
 
-module.exports = function boomTime(time) {
-    console.log(`До взрыва осталось: ${timeFormatter(Math.floor(time))}`);
-    const interval = setInterval(() => {
-        console.log(`До взрыва осталось: ${timeFormatter(Math.floor((time -= 1000)))}`);
-    }, 1000);
+export default function boomTime(time, callback) {
+  if (!time) {
+    return console.log(`Неверно заданы параметр запуска, используйте формат 
+    h - hour
+    m - minute
+    s - second
+    Пример: "22h 10m 33s"
+    `);
+  }
+  console.log(`Запускаем обратный отсчёт!`);
+  console.log(`До взрыва осталось: ${timeFormatter(Math.floor(time))}`);
+  const interval = setInterval(() => {
+    console.log(
+      `До взрыва осталось: ${timeFormatter(Math.floor((time -= 1000)))}`
+    );
+  }, 1000);
 
-    setTimeout(() => {
-        clearInterval(interval);
-        notify(notifyOption);
-    }, time - 1);
-};
+  setTimeout(() => {
+    clearInterval(interval);
+    callback();
+  }, time - 50);
+}
