@@ -71,6 +71,7 @@ form {
     flex-direction: column;
     align-items: center;
     gap: 18px;
+    position: relative;
 }
 
 button[type='submit'] {
@@ -190,29 +191,25 @@ p {
     height: 111px;
 }
 
+/* HTML: <div class="loader"></div> */
 .loader {
-    width: fit-content;
-    font-weight: bold;
-    font-family: monospace;
-    font-size: 24px;
-    clip-path: inset(0 3ch 0 0);
-    animation: l4 1s steps(4) infinite;
+    width: 50px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(farthest-side, #6c38cc 92%, transparent) top/8px 8px no-repeat, conic-gradient(transparent 30%, #6c38cc);
+    mask: radial-gradient(farthest-side, #0000 calc(100% - 8px), #000 0);
+    animation: l13 1s infinite linear;
 }
-.loader:before {
-    content: 'Loading...';
-}
-
 .loader {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    /* transform: translate(-50%, -50%); */
     z-index: 100;
 }
-
-@keyframes l4 {
-    to {
-        clip-path: inset(0 -1ch 0 0);
+@keyframes l13 {
+    100% {
+        transform: rotate(1turn);
     }
 }
 
@@ -220,7 +217,8 @@ textarea {
     height: 96px;
 }
 
-button {
+button,
+.button {
     cursor: pointer;
     border-radius: 10px;
     background: var(--violet, #6c38cc);
@@ -234,10 +232,12 @@ button {
     font-family: Fira Sans;
     font-size: 18px;
 }
-button:hover {
+button:hover,
+.button:hover {
     background: #552ca3;
 }
-button:active {
+button:active,
+.button:active {
     background: #552ca3;
 }
 
@@ -248,7 +248,20 @@ button:active {
 /* .email-icon:hover {
     filter: invert(24%) sepia(62%) saturate(1553%) hue-rotate(237deg) brightness(90%) contrast(110%);
 } */
-
+.closed-form {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    img {
+        width: 16px;
+        height: 16px;
+        margin: unset;
+        filter: brightness(1.5);
+    }
+    img:hover {
+        filter: invert(21%) sepia(100%) saturate(7414%) hue-rotate(359deg) brightness(94%) contrast(117%);
+    }
+}
 .hidden {
     display: none;
 }

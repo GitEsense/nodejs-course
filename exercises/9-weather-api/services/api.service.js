@@ -36,7 +36,7 @@ const getWeather = async (attrs, options) => {
         params: {
             q: city,
             appid: options.token,
-            lang: options?.lang ?? 'ru',
+            lang: options?.language ?? 'ru',
             units: 'metric',
         },
     });
@@ -44,7 +44,7 @@ const getWeather = async (attrs, options) => {
         params: {
             q: city,
             appid: options.token,
-            lang: options?.lang ?? 'ru',
+            lang: options?.language ?? 'ru',
             units: 'metric',
         },
     });
