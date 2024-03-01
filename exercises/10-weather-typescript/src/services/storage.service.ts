@@ -3,44 +3,42 @@ import { join } from 'path';
 import { homedir } from 'os';
 
 const filePath = join(homedir(), 'weather-data.json');
-
 const TOKEN_DICTIONARY = {
     token: 'token',
     city: 'city',
     language: 'language',
 };
 
-const saveKeyValue = async (data) => {
-    let json = {};
+async function saveKeyValue(data: [string, unknown][]): Promise<any> {
+    let json: Record<string, any> = {};
     if (await isExist(filePath)) {
-        const file = await promises.readFile(filePath);
+        const file = (await promises.readFile(filePath)).toString();
         json = JSON.parse(file);
     }
     data.map(([key, value]) => {
+        if (!value) {
+            return;
+        }
         json[key] = value;
     });
 
     await promises.writeFile(filePath, JSON.stringify(json));
-};
+    return;
+}
 
-const getKeyValue = async (key) => {
+const getKeyValue = async (key?: string | undefined): Promise<Record<string, string> | undefined> => {
     if (await isExist(filePath)) {
-        const file = await promises.readFile(filePath);
+        const file = (await promises.readFile(filePath)).toString();
         const data = await JSON.parse(file);
-        return data[key];
+        if (key) {
+            return { [key]: data[key] };
+        }
+        return data;
     }
     return undefined;
 };
 
-const removeFile = async () => {
-    if (!(await isExist(filePath))) {
-        throw new Error('Файл не найден');
-    }
-    await promises.rm(filePath);
-    return true;
-};
-
-const isExist = async (path) => {
+const isExist = async (path: string) => {
     try {
         await promises.stat(path);
         return true;
@@ -48,4 +46,4 @@ const isExist = async (path) => {
         return false;
     }
 };
-export { getKeyValue, saveKeyValue, removeFile, TOKEN_DICTIONARY };
+export { getKeyValue, saveKeyValue, TOKEN_DICTIONARY };
