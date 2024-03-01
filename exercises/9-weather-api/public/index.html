@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./styles/global.css" />
+        <link rel="stylesheet" href="./styles/main.css" />
+        <link rel="stylesheet" href="./styles/components.css" />
+        <title>Weather</title>
+    </head>
+    <body>
+        <header class="header">
+            <div class="header__wrapper">
+                <a href="#" class="header__logo"><img src="./img/my_logo.png" alt="Логотип" /> Kldev Web Development </a>
+            </div>
+        </header>
+        <main>
+            <div class="loader hidden"></div>
+            <div class="popups hidden">
+                <form id="options-form" action="#" onsubmit="postForm(event)">
+                    <!-- <div class="closed-form" onclick="toggleHiddenElement(page.popups)">
+                        <img src="./img/exit.svg" alt="" />
+                    </div>
+                    <h1>Передать параметры</h1>
+                    <div class="form__item">
+                        <img src="./img/token.svg" alt="Иконка токена" />
+
+                        <div class="form__content">
+                            <input type="text" id="token" name="token" placeholder="Токен авторизации" />
+                        </div>
+                    </div>
+                    <div class="form__item">
+                        <img src="./img/city.svg" alt="Иконка города" />
+                        <div class="form__content">
+                            <label for="city">Название города</label>
+                            <select name="city" id="city">
+                                <option value="moscow">Москва</option>
+                                <option value="sankt-peterburg">Санкт-Петербург</option>
+                                <option value="kaliningrad">Калининград</option>
+                                <option value="london">Лондон</option>
+                                <option value="tokio">Токио</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form__item">
+                        <img src="./img/language.svg" alt="Иконка языка" />
+                        <div class="form__content">
+                            <label for="language">Выбрать язык</label>
+                            <select name="language" id="language">
+                                <option value="ru">Русский</option>
+                                <option value="en">English</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form__item"></div>
+                    <button type="submit" class="form-button">Отправить</button> -->
+                </form>
+            </div>
+            <div class="content__wrapper">
+                <div class="content__actions">
+                    <button class="button" onclick="page.popups.classList.toggle('hidden'); document.querySelector('#token').focus();">
+                        Конфигурация
+                    </button>
+                    <button class="button weather-button" onclick="getWeather()">Запросить погоду</button>
+                </div>
+                <div class="content__block hidden"></div>
+            </div>
+            <div class="test-block"></div>
+        </main>
+        <script src="./scripts/app.js"></script>
+    </body>
+</html>

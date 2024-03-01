@@ -1,0 +1,25 @@
+{
+    "name": "git-esense-weather-cli",
+    "version": "1.1.0",
+    "description": "CLI for getting weather",
+    "main": "weather.js",
+    "bin": {
+        "weather": "weather.js"
+    },
+    "type": "module",
+    "scripts": {
+        "start": "node weather.js",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [
+        "cli",
+        "weather"
+    ],
+    "author": "Esense",
+    "license": "ISC",
+    "dependencies": {
+        "axios": "^1.6.7",
+        "cors": "^2.8.5",
+        "express": "^4.18.2"
+    }
+}
